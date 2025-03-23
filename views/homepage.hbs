@@ -1,0 +1,279 @@
+<body class="layout-fixed sidebar-expand-lg bg-body-tertiary">
+    <!--begin::App Wrapper-->
+    <div class="app-wrapper">
+        <!--begin::Header-->
+        <nav class="app-header navbar navbar-expand bg-body">
+            <!--begin::Container-->
+            <div class="container-fluid">
+                <!--begin::Start Navbar Links-->
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" data-lte-toggle="sidebar" href="#" role="button">
+                            <i class="bi bi-list"></i>
+                        </a>
+                    </li>
+                <!--end::User Menu Dropdown-->
+                </ul>
+                <!--end::End Navbar Links-->
+            </div>
+            <!--end::Container-->
+        </nav>
+        <!--end::Header-->
+        <!--begin::Sidebar-->
+        <aside class="app-sidebar bg-body-secondary shadow" data-bs-theme="dark">
+            <div class="sidebar-brand">
+                <!--begin::Brand Link-->
+
+                    <!--begin::Brand Text-->
+                    <span class="brand-text fw-light">Hydroponics</span>
+                    <!--end::Brand Text-->
+
+                <!--end::Brand Link-->
+            </div>
+            <div class="sidebar-wrapper">
+                <nav class="mt-2">
+                    <ul class="nav sidebar-menu flex-column" data-lte-toggle="treeview" role="menu"
+                        data-accordion="false">
+
+                        <li class="nav-header">STATUS</li>
+
+                        <li class="nav-item">
+                            <a href="../docs/layout.html" class="nav-link">
+                                <i class="fa-regular fa-circle-check"></i>
+                                <p>Current Status</p>
+                            </a>
+                        </li>
+
+                        <li class="nav-header">DATABASE</li>
+
+                        <li class="nav-item">
+
+                            <a href="#" class="nav-link">
+                                <i class="fa-solid fa-chart-simple"></i>
+                                <p> History
+                                    <i class="nav-arrow bi bi-chevron-right"></i>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="../index2.html" class="nav-link">
+                                        <i class="fa-solid fa-arrow-up-from-water-pump"></i>
+                                        <p>Water Pump</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="../index2.html" class="nav-link">
+                                        <i class="fa-solid fa-soap"></i>
+                                        <p>Oxygen Motor</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="../index2.html" class="nav-link">
+                                        <i class="fa-solid fa-sun-plant-wilt"></i>
+                                        <p>Grow LEDs</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="../index3.html" class="nav-link">
+                                        <i class="fa-brands fa-react"></i>
+                                        <p>Nutrient Level</p>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </aside>
+        <!--end::Sidebar-->
+        <!--begin::App Main-->
+        <main class="app-main">
+            <!--begin::App Content Header-->
+            <div class="app-content-header">
+                <!--begin::Container-->
+                <div class="container-fluid">
+                    <!--begin::Row-->
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <h3>Hydroponics Monitoring System</h3>
+                        </div>
+                        <div class="col-sm-6">
+                            <ol class="breadcrumb float-sm-end">
+                            </ol>
+                        </div>
+                    </div>
+                    <!--end::Row-->
+                </div>
+                <!--end::Container-->
+            </div>
+            <!--end::App Content Header-->
+            <!--begin::App Content-->
+            <div class="app-content">
+                <!--begin::Container-->
+                <div class="container-fluid">
+                    <!--begin::Row-->
+                    <div class="row">
+                        {{#each Status}}
+                        <div id="area_{{ this.ID }}" class="col-md-3">
+                            <div class="{{ this.STYLE }}">
+                                <span class="info-box-icon">
+                                    <i class="{{ this.ICON }}"></i>
+                                </span>
+                                <div class="info-box-content">
+                                    <span class="info-box-text">{{ this.NAME }}</span>
+                                    <span class="info-box-number">{{ this.VALUE }}</span>
+                                    <div class="progress">
+                                        <div class="progress-bar" style="width: 100%;"></div>
+                                    </div>
+                                    <span class="progress-description">Next Refersh in 30 Secs...</span>
+                                </div>
+                            </div>
+                        </div>
+                        {{/each}}
+                    </div>
+                    <!--end::Row-->
+                </div>
+                <div class="row">
+                    <div class="col-md-4">
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card mb-4">
+                            <div class="card-header">
+                                <span class="card-title">Manual Controls</span>
+                            </div>
+                            <div class="card-body p-0">
+                                <table class="table table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th>Control</th>
+                                            <th>Trigger</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>Water Pump</td>
+                                            <td>
+                                                <div class="material-switch">
+                                                    <input id="someSwitchOptionDefault" name="someSwitchOption001"
+                                                        type="checkbox" />
+                                                    <label for="someSwitchOptionDefault" class="label"></label>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Water Drain</td>
+                                            <td>
+                                                <div class="material-switch">
+                                                    <input id="someSwitchOptionDefault1" name="someSwitchOption002"
+                                                        type="checkbox" />
+                                                    <label for="someSwitchOptionDefault1" class="label"></label>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Oxygen Motor</td>
+                                            <td>
+                                                <div class="material-switch">
+                                                    <input id="someSwitchOptionDefault2" name="someSwitchOption003"
+                                                        type="checkbox" />
+                                                    <label for="someSwitchOptionDefault2" class="label"></label>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Grow LED</td>
+                                            <td>
+                                                <div class="material-switch">
+                                                    <input id="someSwitchOptionDefault3" name="someSwitchOption004"
+                                                        type="checkbox" />
+                                                    <label for="someSwitchOptionDefault3" class="label"></label>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--end::Container-->
+            </div>
+            <!--end::App Content-->
+        </main>
+        <!--end::App Main-->
+        <!--begin::Footer-->
+        <footer class="app-footer">
+            <!--begin::To the end-->
+            <div class="float-end d-none d-sm-inline">Anything you want</div>
+            <!--end::To the end-->
+            <!--begin::Copyright-->
+            <strong>
+                Project Presented by
+                <a href="https://github.com/Meenadharshini27" class="text-decoration-none">Meenadharshini</a>.
+            </strong> and Team
+            <!--end::Copyright-->
+        </footer>
+        <!--end::Footer-->
+    </div>
+    <!--end::App Wrapper-->
+    <!--begin::Script-->
+    <!--begin::Third Party Plugin(OverlayScrollbars)-->
+    <script src="https://cdn.jsdelivr.net/npm/overlayscrollbars@2.10.1/browser/overlayscrollbars.browser.es6.min.js"
+        integrity="sha256-dghWARbRe2eLlIJ56wNB+b760ywulqK3DzZYEpsg2fQ=" crossorigin="anonymous"></script>
+    <!--end::Third Party Plugin(OverlayScrollbars)--><!--begin::Required Plugin(popperjs for Bootstrap 5)-->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+        integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+        crossorigin="anonymous"></script>
+    <!--end::Required Plugin(popperjs for Bootstrap 5)--><!--begin::Required Plugin(Bootstrap 5)-->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"
+        integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy"
+        crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <!--end::Required Plugin(Bootstrap 5)--><!--begin::Required Plugin(AdminLTE)-->
+    <script src="../js/adminlte.js"></script>
+    <!--end::Required Plugin(AdminLTE)--><!--begin::OverlayScrollbars Configure-->
+    <script>
+        const SELECTOR_SIDEBAR_WRAPPER = '.sidebar-wrapper';
+        const Default = {
+            scrollbarTheme: 'os-theme-light',
+            scrollbarAutoHide: 'leave',
+            scrollbarClickScroll: true,
+        };
+        document.addEventListener('DOMContentLoaded', function () {
+            const sidebarWrapper = document.querySelector(SELECTOR_SIDEBAR_WRAPPER);
+            if (sidebarWrapper && typeof OverlayScrollbarsGlobal?.OverlayScrollbars !== 'undefined') {
+                OverlayScrollbarsGlobal.OverlayScrollbars(sidebarWrapper, {
+                    scrollbars: {
+                        theme: Default.scrollbarTheme,
+                        autoHide: Default.scrollbarAutoHide,
+                        clickScroll: Default.scrollbarClickScroll,
+                    },
+                });
+            }
+        });
+        
+        timer = 30;
+        factor = 100 / 30;
+        setInterval(() => {
+            if (timer > 0) {
+                $('.progress-description').html('Refreshes in ' + timer + ' seconds...');
+                $('.progress-bar').css('width', 100 - (factor * timer) + '%');
+                timer--;
+            }
+            else if (timer == 0) {
+                $('.progress-description').html('Refreshing...');
+                timer--;
+                $.get("Refresh", function (data) {
+                    data.forEach(param => {
+                        $('#area_' + param.ID + ' .info-box-number').html(param.VALUE);
+                    });
+                    timer = 30;
+                });
+            }
+        }, 1000);
+    </script>
+    <script src="https://kit.fontawesome.com/c581a327ef.js" crossorigin="anonymous"></script>
+
+    <!--end::OverlayScrollbars Configure-->
+    <!--end::Script-->
+</body>
