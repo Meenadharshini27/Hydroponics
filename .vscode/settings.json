@@ -1,0 +1,8 @@
+{
+    "appService.zipIgnorePattern": [
+        "node_modules{,/**}",
+        ".vscode{,/**}"
+    ],
+    "appService.defaultWebAppToDeploy": "/subscriptions/955a8850-689e-46e7-b980-60c63e1d8123/resourceGroups/Hydroponics/providers/Microsoft.Web/sites/hydroponics-md",
+    "appService.deploySubpath": "."
+}
