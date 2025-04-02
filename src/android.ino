@@ -22,8 +22,8 @@ int o2mTimer = 0;
 bool ledStatus = false;
 bool o2mStatus = false;
 
-const char* ssid = "ASSA";  // Replace with your WiFi SSID
-const char* password = "creative";  // Replace with your WiFi Password
+const char* ssid = "OC net venuma ";  // Replace with your WiFi SSID
+const char* password = "2004KuttY";  // Replace with your WiFi Password
 const char* serverUrl = "https://hydroponics-md.azurewebsites.net/push/2/ON";  // Azure API Base URL
 
 WiFiClientSecure client;  // Secure client for HTTPS
