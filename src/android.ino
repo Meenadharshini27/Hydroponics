@@ -64,6 +64,9 @@ void setup() {
     
     digitalWrite(O2M, HIGH);
     digitalWrite(LED, HIGH);
+
+    o2mStatus = true;   
+    ledStatus = true;
     
     saveValues("2",o2mStatus? "OFF" : "ON");
     saveValues("3",ledStatus? "OFF" : "ON");
