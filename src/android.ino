@@ -15,12 +15,12 @@
 #define LED 14 // D5
 #define O2M 12 // D6
 
-int ledTimerMax = 2 * 60; // 2 Mins
-int o2mTimerMax = 3 * 60; // 3 Mins
-int ledTimer = 0;
-int o2mTimer = 0;
-bool ledStatus = false;
-bool o2mStatus = false;
+int O2M_INTERVAL = 2 * 60 * 1000; // 2 Mins
+int LED_INTERVAL = 3 * 60 * 1000; // 3 Mins
+int lastO2MTime = 0;
+int lastLEDTime = 0;
+bool ledStatus = true;
+bool o2mStatus = true;
 
 const char* ssid = "srmp jio";  // Replace with your WiFi SSID
 const char* password = "7598150639";  // Replace with your WiFi Password
@@ -60,6 +60,15 @@ void setup() {
     pinMode(O2M, OUTPUT);
     pinMode(FLT, INPUT);
     digitalWrite(IN1, LOW);
+    
+    
+    digitalWrite(O2M, HIGH);
+    digitalWrite(LED, HIGH);
+    
+    saveValues("2",o2mStatus? "OFF" : "ON");
+    saveValues("3",ledStatus? "OFF" : "ON");
+
+
 }
 
 void saveValues(String id, String value) {
@@ -75,6 +84,7 @@ void saveValues(String id, String value) {
 
 void loop() {
   unsigned long start = millis();
+
   if (WiFi.status() == WL_CONNECTED) {
     // 1. Check and Write Water Pump Status
     int level;
@@ -93,45 +103,27 @@ void loop() {
     }
 
 
+    unsigned long currentMillis = millis();
+
     // 2. O2 Motor
-    if (o2mTimer != 0) {
-      o2mTimer--;
-    }
-    else if(o2mTimer == 0) {
-      o2mTimer = o2mTimerMax;
-
-      if(o2mStatus == false){
-        //o2 Motor is ON... Time Out, Turn off Now
-        digitalWrite(O2M, LOW);
-        saveValues("2", "OFF");
-      }
-      else{
-        //o2 Motor is OFF... Time Out, Turn on Now...
-        digitalWrite(O2M, HIGH);
-        saveValues("2", "ON");
-      }
-
+    if (currentMillis - lastO2MTime >= O2M_INTERVAL) {
+        lastO2MTime = currentMillis;  // Reset timer
+        o2mStatus = !o2mStatus;  // Toggle state
+        digitalWrite(O2M, o2mStatus ? HIGH : LOW);  // Apply new state
+        Serial.print("O2 Motor is now: ");
+        Serial.println(o2mStatus ? "ON" : "OFF");
+        saveValues("2",o2mStatus? "OFF" : "ON");
     }
 
-    // 3. LED 
-    if (ledTimer != 0) {
-      ledTimer--;
+    // **Grow LED Logic**
+    if (currentMillis - lastLEDTime >= LED_INTERVAL) {
+        lastLEDTime = currentMillis;  // Reset timer
+        ledStatus = !ledStatus;  // Toggle state
+        digitalWrite(LED, ledStatus ? HIGH : LOW);  // Apply new state
+        Serial.print("Grow LED is now: ");
+        Serial.println(ledStatus ? "ON" : "OFF");
+        saveValues("3", ledStatus? "OFF" : "ON");
     }
-    else if (ledTimer == 0) {
-      ledTimer = ledTimerMax;
-
-      if(ledStatus == false){
-        //LED is ON... Time Out, Turn off Now...
-        digitalWrite(LED, LOW);
-        saveValues("3", "OFF");
-      }
-      else{
-        //LED is OFF... Time Out, Turn on Now...
-        digitalWrite(LED, HIGH);
-        saveValues("3", "ON");
-      }
-    }
-
 
     // 4. Measure TDS and Log Values - Check Plant Nutrients
     float SensorValue = analogRead(A0) - 7.0;
@@ -162,7 +154,8 @@ void loop() {
   Serial.print("Time Taken: ");
   Serial.println(end - start);
 
-  if ((end - start) < 5000) {
-    delay(5000 - (end - start));
-  }
+  // if ((end - start) < 5000) {
+  //   delay(5000 - (end - start));
+  // }
 }
+
