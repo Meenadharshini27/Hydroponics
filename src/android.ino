@@ -22,15 +22,15 @@ int lastLEDTime = 0;
 bool ledStatus = true;
 bool o2mStatus = true;
 
-const char* ssid = "srmp jio";  // Replace with your WiFi SSID
-const char* password = "7598150639";  // Replace with your WiFi Password
+const char* ssid = "Rsmd";  // Replace with your WiFi SSID
+const char* password = "1234567890";  // Replace with your WiFi Password
 const char* serverUrl = "https://hydroponics-md.azurewebsites.net/push/2/OFF";  // Azure API Base URL
 
 WiFiClientSecure client;  // Secure client for HTTPS
 HTTPClient http;
 
-unsigned long previousMillis = 0;
-const long interval = 40000; // 40 seconds
+// unsigned long previousMillis = 0;
+// const long interval = 40000; // 40 seconds
 
 bool status = false;
 
@@ -144,6 +144,8 @@ void loop() {
     if (tds < 300) {
       // Poor or Insufficient Nutirients, Drain Water in System and Refill
       digitalWrite(IN4, HIGH);
+      delay(180000);
+      digitalWrite(IN4, LOW);
     }
   }
   else {
