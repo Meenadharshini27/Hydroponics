@@ -79,6 +79,12 @@
     var chart = new dimple.chart(svg, data75);
     var x = chart.addTimeAxis("x", "TIMESTAMP", "%Y-%m-%dT%H:%M:%S.%LZ", "%Y %b %d");
     var y = chart.addMeasureAxis("y", "P_VALUE",);
+    y.title = "VALUE (PPM)";
+    y.overrideMax = 1000;
+    y.overrideMin = -30;
+    x.title = "Date / Time";
+    x.timePeriod = d3.time.days;
+
     var s = chart.addSeries(null, dimple.plot.line, [x, y]);
     chart.draw();
 </script>
